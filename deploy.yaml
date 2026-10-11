@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: main-app-deployment
+  labels:
+    app: main-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: main-app
+  template:
+    metadata:
+      labels:
+        app: main-app
+    spec:
+      containers:
+      - name: main
+        image: main-svc:v1
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docs-app-deployment
+  labels:
+    app: docs-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: docs-app
+  template:
+    metadata:
+      labels:
+        app: docs-app
+    spec:
+      containers:
+      - name: docs
+        image: docs-svc:v1
+        ports:
+        - containerPort: 80
+
+

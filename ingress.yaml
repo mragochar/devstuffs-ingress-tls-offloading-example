@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-host-based-routing-with-tls
+spec:
+  tls:
+  - hosts:
+      - main.site.com
+      - docs.site.com
+    secretName: my-site-tls
+  rules:
+  - host: "main.site.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: main-svc
+            port:
+              number: 8080
+  - host: "docs.site.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: docs-svc
+            port:
+              number: 8080

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: main-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: main-app
+  ports:
+    - port: 8080
+      targetPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: docs-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: docs-app
+  ports:
+    - port: 8080
+      targetPort: 80
